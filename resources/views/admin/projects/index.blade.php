@@ -22,6 +22,7 @@
                 <th scope="col">Collaboratori</th>
                 <th scope="col">Data di Pubblicazione</th>
                 <th scope="col">Tipologia</th>
+                <th scope="col">Tecnologia</th>
                 <th scope="col">Azioni</th>
                 </tr>
             </thead>
@@ -34,6 +35,7 @@
                     <td>{{$project->collaborators}}</td>
                     <td>{{$project->publishing_date}}</td>
                     <td>{!! $project->getTypologyName()!!}</td>
+                    <td>{!! $project->getTechName()!!}</td>
                     <td>
                     <a href="{{ route('admin.projects.show', $project) }}">
                         <i class="fa-regular fa-eye"></i>

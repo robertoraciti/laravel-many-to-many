@@ -24,6 +24,14 @@ class Project extends Model
     {
         return $this->typology ? "<span class='badge' style='background-color: {$this->typology->color}'>{$this->typology->name}</span>" : "";
     }
+    public function getTechName()
+    {
+        $name_tech = "";
+        foreach ($this->technology as $tech) {
+            $name_tech .= "<span class='badge rounded-pill mx-1' style='background-color: {$tech->color}'>{$tech->name}</span>";
+        }
 
+        return $name_tech;
 
+    }
 }

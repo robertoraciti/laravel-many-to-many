@@ -38,6 +38,10 @@
                     <strong>Tipologia: </strong><br>
                     {!! $project->getTypologyName()!!}
                 </div>
+                <div class="col-2">
+                    <strong>Tecnologia: </strong><br>
+                    {!! $project->getTechName()!!}
+                </div>
             </div>
         </div>
     </div>
