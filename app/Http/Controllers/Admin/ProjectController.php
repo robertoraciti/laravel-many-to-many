@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Technology;
 use App\Models\Typology;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -30,7 +32,8 @@ class ProjectController extends Controller
     public function create()
     {
         $typologies = Typology::all();
-        return view('admin.projects.create', compact('typologies'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('typologies', 'technologies'));
     }
 
     /**
@@ -48,6 +51,10 @@ class ProjectController extends Controller
         $project = new Project();
         $project->fill($data);
         $project->save();
+
+        if (Arr::exists($data, 'technologies')) {
+            $project->technology()->attach($data['technologies']);
+        }
 
         return redirect()
             ->route('admin.projects.show', $project)
@@ -120,6 +127,7 @@ class ProjectController extends Controller
                 'collaborators' => 'required|integer',
                 'publishing_date' => 'required|date',
                 'typology_id' => 'nullable|exists:typologies,id',
+                'technologies' => 'nullable|exists:technologies,id',
 
             ],
             [
@@ -137,6 +145,8 @@ class ProjectController extends Controller
                 'publishing_date.date' => 'Formato data errato',
 
                 'typology_id.exists' => 'La tipologia inserita non è valida',
+
+                'technologies.exists' => 'La tecnologia inserita non è valida'
             ]
 
         )->validate();
