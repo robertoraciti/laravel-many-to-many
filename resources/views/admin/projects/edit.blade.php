@@ -51,7 +51,8 @@
             <select name="typology_id" id="typology_id" class="form-select @error('typology_id') is-invalid @enderror">
                 <option value="">Senza tipologia</option>
                 @foreach ($typologies as $typology)
-                <option value="{{$typology->id}}" @if (old('typology_id') ?? $project->typology->id == $typology->id) selected @endif>{{$typology->name }}</option>
+                @dump($typology)
+                <option value="{{$typology->id}}" @if (old('typology_id') ?? $project->typology?->id == $typology->id) selected @endif>{{$typology->name }}</option>
                 @endforeach
             </select>
             @error('typology_id')

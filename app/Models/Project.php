@@ -22,7 +22,7 @@ class Project extends Model
 
     public function getTypologyName()
     {
-        return $this->typology ? "<span class='badge' style='background-color: {$this->typology->color}'>{$this->typology->name}</span>" : "";
+        return $this->typology ? "<span class='badge' style='background-color: {$this->typology->color}'>{$this->typology->name}</span>" : " ";
     }
     public function getTechName()
     {
