@@ -6,12 +6,11 @@
         <h1>Aggiungi progetto</h1>
         <a href="{{ route('admin.projects.index')}}" class="btn btn-primary">Torna indietro</a>
     </div>
-    <form action="{{ route('admin.projects.store') }}" method="post" class="row g-3">
+    <form action="{{ route('admin.projects.store') }}" method="post" class="row g-3" enctype="multipart/form-data">
         @csrf
         <div class="col-3">
             <label for="name" class="form-label">Nome</label>
             <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
-
             @error('nome')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -31,6 +30,15 @@
             <label for="collaborators" class="form-label">Colaboratori</label>
             <input type="number" name="collaborators" id="collaborators" class="form-control @error('collaborators') is-invalid @enderror" value="{{old('collaborators')}}">
             @error('collaborators')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="col-3">
+            <label for="image" class="form-label">Immagine</label>
+            <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" value="{{old('image')}}">
+            @error('image')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>

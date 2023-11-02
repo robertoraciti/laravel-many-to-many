@@ -8,6 +8,7 @@ use App\Models\Typology;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Project;
 
@@ -50,6 +51,12 @@ class ProjectController extends Controller
 
         $project = new Project();
         $project->fill($data);
+
+        if (Arr::exists($data, 'image')) {
+            $image_path = Storage::put('uploads/projects/image', $data['image']);
+            $project->image = $image_path;
+        }
+
         $project->save();
 
         if (Arr::exists($data, 'technologies')) {
@@ -134,6 +141,7 @@ class ProjectController extends Controller
                 'name' => 'required|string|max:50',
                 'repo' => 'required|url',
                 'collaborators' => 'required|integer',
+                'image' => 'nullable|image',
                 'publishing_date' => 'required|date',
                 'typology_id' => 'nullable|exists:typologies,id',
                 'technologies' => 'nullable|exists:technologies,id',
@@ -149,6 +157,8 @@ class ProjectController extends Controller
 
                 'collaborators.required' => 'Il numero dei collaboratori è obbligatorio',
                 'collaborators.integer' => 'Il campo deve essere un numero',
+
+                'image.image' => 'Il file deve essere un\'immagine',
 
                 'publishing_date.required' => 'La data è obbligatoria',
                 'publishing_date.date' => 'Formato data errato',

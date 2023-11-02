@@ -6,7 +6,7 @@
         <h1>Modifica progetto</h1>
         <a href="{{ route('admin.projects.index')}}" class="btn btn-primary">Torna indietro</a>
     </div>
-    <form action="{{ route('admin.projects.update', $project) }}" method="post" class="row g-3">
+    <form action="{{ route('admin.projects.update', $project) }}" method="post" class="row g-3" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 

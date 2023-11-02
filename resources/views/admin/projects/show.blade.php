@@ -12,7 +12,10 @@
         </div>
     </h1>
     <div class="row g-5">
-        <div class="col-12">
+        <div class="col-4">
+            <img src="{{ asset('/storage/' . $project->image) }}" alt="" class="img-fluid">
+        </div>
+        <div class="col-8">
             <div class="row g-5">
                 <div class="col-2">
                     <strong>ID: </strong><br>
